@@ -3,3 +3,5 @@ dist/
 .DS_Store
 .superpowers/
 output/
+__pycache__/
+*.pyc
