@@ -15,6 +15,23 @@ describe("App", () => {
     expect(screen.getByRole("img", { name: /programmer personality cast illustration/i })).toBeInTheDocument();
   });
 
+  it("switches the experience to English when the locale toggle is used", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "English" }));
+
+    expect(screen.getByRole("heading", { name: "Programmer Personality Test" })).toBeInTheDocument();
+    expect(screen.getByText("A fun personality test for programmers.")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Start Test" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Start Test" }));
+
+    expect(
+      screen.getByText(/When Friday-night grunt work lands on my desk/i)
+    ).toBeInTheDocument();
+    expect(screen.getAllByText("Strongly Agree").length).toBeGreaterThan(0);
+  });
+
   it("shows the first question after starting the assessment", () => {
     render(<App />);
 

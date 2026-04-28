@@ -1,16 +1,28 @@
 import { toPng } from "html-to-image";
 import { useRef, useState } from "react";
 import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
-import type { AssessmentResult } from "../lib/types";
+import type { AppCopy, AssessmentResult, DimensionDefinition, Locale } from "../lib/types";
+import { LocaleToggle } from "./LocaleToggle";
 import { ResultBars } from "./ResultBars";
 import { ShareCard } from "./ShareCard";
 
 interface ResultScreenProps {
+  copy: AppCopy;
+  dimensions: DimensionDefinition[];
+  locale: Locale;
   result: AssessmentResult;
   onRestart: () => void;
+  onLocaleChange: (locale: Locale) => void;
 }
 
-export function ResultScreen({ result, onRestart }: ResultScreenProps) {
+export function ResultScreen({
+  copy,
+  dimensions,
+  locale,
+  result,
+  onRestart,
+  onLocaleChange,
+}: ResultScreenProps) {
   const { personality } = result;
   const shareCardRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
@@ -47,6 +59,9 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
 
   return (
     <section className="result-shell">
+      <div className="result-toolbar">
+        <LocaleToggle label={copy.languageLabel} locale={locale} onChange={onLocaleChange} />
+      </div>
       <div className="result-hero">
         <div className="result-hero-copy">
           <p className="result-kicker">{personality.group}</p>
@@ -63,49 +78,49 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
         </div>
       </div>
 
-      <ResultBars scores={result.dimensions} />
+      <ResultBars dimensions={dimensions} scores={result.dimensions} />
 
       <div className="result-grid">
         <article className="result-card">
-          <h3>长描述</h3>
+          <h3>{copy.resultSections.description}</h3>
           <p>{personality.description}</p>
         </article>
         <article className="result-card">
-          <h3>核心优势</h3>
+          <h3>{copy.resultSections.strengths}</h3>
           <p>{personality.strengths}</p>
         </article>
         <article className="result-card">
-          <h3>致命风险</h3>
+          <h3>{copy.resultSections.risks}</h3>
           <p>{personality.risks}</p>
         </article>
         <article className="result-card">
-          <h3>适宜环境</h3>
+          <h3>{copy.resultSections.environment}</h3>
           <p>{personality.environment}</p>
         </article>
       </div>
 
       <article className="result-card result-card--lifestyle">
-        <h3>生活与社交侧写</h3>
+        <h3>{copy.resultSections.lifestyle}</h3>
         <p>{personality.lifestyle}</p>
       </article>
 
       <div className="result-actions">
         <button className="question-button" onClick={handleExport} type="button">
-          {isExporting ? "生成中..." : "保存结果图"}
+          {isExporting ? copy.resultButtons.generatingImage : copy.resultButtons.saveImage}
         </button>
         <button
           className="question-button question-button--secondary"
           onClick={onRestart}
           type="button"
         >
-          重新测试
+          {copy.resultButtons.restart}
         </button>
       </div>
 
       {isExporting ? (
         <div className="share-export-shell">
           <div ref={shareCardRef}>
-            <ShareCard result={result} />
+            <ShareCard copy={copy} dimensions={dimensions} result={result} />
           </div>
         </div>
       ) : null}

@@ -1,15 +1,18 @@
 interface ProgressHeaderProps {
   current: number;
+  label: string;
   total: number;
 }
 
-export function ProgressHeader({ current, total }: ProgressHeaderProps) {
+export function ProgressHeader({ current, label, total }: ProgressHeaderProps) {
   const percent = Math.round((current / total) * 100);
 
   return (
     <header className="progress-header">
       <div>
-        <p className="progress-kicker">Question {current}</p>
+        <p className="progress-kicker">
+          {label} {current}
+        </p>
         <h2>
           {current} / {total}
         </h2>

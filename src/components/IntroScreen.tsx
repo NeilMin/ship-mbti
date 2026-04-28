@@ -1,23 +1,34 @@
-import { dimensions } from "../data/dimensions";
+import type { AppCopy, DimensionDefinition, Locale } from "../lib/types";
+import { LocaleToggle } from "./LocaleToggle";
 
 interface IntroScreenProps {
+  copy: AppCopy;
+  dimensions: DimensionDefinition[];
+  locale: Locale;
   onStart: () => void;
+  onLocaleChange: (locale: Locale) => void;
 }
 
-export function IntroScreen({ onStart }: IntroScreenProps) {
+export function IntroScreen({
+  copy,
+  dimensions,
+  locale,
+  onStart,
+  onLocaleChange,
+}: IntroScreenProps) {
   return (
     <section className="hero-card">
+      <div className="hero-toolbar">
+        <LocaleToggle label={copy.languageLabel} locale={locale} onChange={onLocaleChange} />
+      </div>
       <div className="hero-layout">
         <div className="hero-main">
-          <p className="hero-kicker">Programmer Personality Test</p>
-          <h1>程序员人格测试</h1>
-          <p className="hero-copy">一个有趣的程序员人格测试。</p>
-          <p className="hero-note">
-            从 AI 依赖、架构洁癖、排错玄学，到你到底是技术理想主义者还是准点下班派，
-            这套测试会给你一个很像真的答案。
-          </p>
+          <p className="hero-kicker">{copy.heroKicker}</p>
+          <h1>{copy.heroTitle}</h1>
+          <p className="hero-copy">{copy.heroSubtitle}</p>
+          <p className="hero-note">{copy.heroNote}</p>
           <button className="hero-button" type="button" onClick={onStart}>
-            开始测试
+            {copy.startButton}
           </button>
         </div>
 

@@ -1,3 +1,5 @@
+import { copyByLocale } from "../data/copy";
+import { dimensionsZh } from "../data/dimensions.zh";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { getAssessmentResultByCode } from "../lib/scoring";
@@ -8,7 +10,16 @@ describe("Result artwork", () => {
   it("renders the matching character illustration on the result page", () => {
     const result = getAssessmentResultByCode("CAPW");
 
-    const { container } = render(<ResultScreen result={result} onRestart={() => {}} />);
+    const { container } = render(
+      <ResultScreen
+        copy={copyByLocale.zh}
+        dimensions={dimensionsZh}
+        locale="zh"
+        onLocaleChange={() => {}}
+        onRestart={() => {}}
+        result={result}
+      />
+    );
 
     const image = container.querySelector(".result-hero-image");
     expect(image).not.toBeNull();
@@ -18,7 +29,7 @@ describe("Result artwork", () => {
   it("renders the matching character illustration on the share card", () => {
     const result = getAssessmentResultByCode("TOPW");
 
-    render(<ShareCard result={result} />);
+    render(<ShareCard copy={copyByLocale.zh} dimensions={dimensionsZh} result={result} />);
 
     const image = screen.getByRole("img", { name: /TOPW character illustration/i });
     expect(image).toHaveAttribute("src", "/characters/topw.png");

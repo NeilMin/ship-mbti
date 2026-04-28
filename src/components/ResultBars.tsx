@@ -1,11 +1,11 @@
-import { dimensions } from "../data/dimensions";
-import type { DimensionScore } from "../lib/types";
+import type { DimensionDefinition, DimensionScore } from "../lib/types";
 
 interface ResultBarsProps {
+  dimensions: DimensionDefinition[];
   scores: DimensionScore[];
 }
 
-export function ResultBars({ scores }: ResultBarsProps) {
+export function ResultBars({ dimensions, scores }: ResultBarsProps) {
   return (
     <section className="result-bars">
       {scores.map((score) => {

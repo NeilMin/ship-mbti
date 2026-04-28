@@ -1,3 +1,4 @@
+export type Locale = "zh" | "en";
 export type Dimension = "S" | "H" | "I" | "P";
 export type SourcePole = "C" | "T";
 export type HierarchyPole = "O" | "A";
@@ -89,4 +90,49 @@ export interface AssessmentResult {
   code: ResultCode;
   personality: Personality;
   dimensions: DimensionScore[];
+}
+
+export interface AppCopy {
+  heroKicker: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  heroNote: string;
+  startButton: string;
+  languageLabel: string;
+  questionLabel: string;
+  scaleLabels: {
+    strongAgree: string;
+    agree: string;
+    slightlyAgree: string;
+    neutral: string;
+    slightlyDisagree: string;
+    disagree: string;
+    strongDisagree: string;
+  };
+  backButton: string;
+  resultSections: {
+    description: string;
+    strengths: string;
+    risks: string;
+    environment: string;
+    lifestyle: string;
+  };
+  resultButtons: {
+    saveImage: string;
+    generatingImage: string;
+    restart: string;
+  };
+  share: {
+    kicker: string;
+    cta: string;
+    visit: string;
+  };
+}
+
+export interface AppContent {
+  locale: Locale;
+  questions: Question[];
+  dimensions: DimensionDefinition[];
+  personalities: Personality[];
+  copy: AppCopy;
 }

@@ -1,5 +1,6 @@
 import { personalities } from "../data/personalities";
 import { questions } from "../data/questions";
+import type { Personality, Question } from "./types";
 import type {
   AnswerMap,
   AssessmentResult,
@@ -42,9 +43,10 @@ function toPublicPole(pole: ScorePole) {
 
 function isDimensionComplete(
   dimension: Dimension,
-  answers: AnswerMap
+  answers: AnswerMap,
+  questionSet: Question[]
 ) {
-  return questions
+  return questionSet
     .filter((question) => question.dimension === dimension)
     .every((question) => answers[question.id] !== undefined);
 }
@@ -55,10 +57,11 @@ export function getResultCode(parts: ResultParts): ResultCode {
 
 export function calculateDimensionScore(
   dimension: Dimension,
-  answers: AnswerMap
+  answers: AnswerMap,
+  questionSet: Question[] = questions
 ): DimensionScore {
   const { left: leftPole, right: rightPole } = dimensionPoleOrder[dimension];
-  const rawScore = questions
+  const rawScore = questionSet
     .filter((question) => question.dimension === dimension)
     .reduce((sum, question) => {
       const value = answers[question.id];
@@ -85,11 +88,14 @@ export function calculateDimensionScore(
   };
 }
 
-export function calculateResultParts(answers: AnswerMap): ResultParts {
-  const source = calculateDimensionScore("S", answers).winningPole as ResultParts["source"];
-  const hierarchy = calculateDimensionScore("H", answers).winningPole as ResultParts["hierarchy"];
-  const investigation = calculateDimensionScore("I", answers).winningPole as InvestigationPublicPole;
-  const purpose = calculateDimensionScore("P", answers).winningPole as ResultParts["purpose"];
+export function calculateResultParts(
+  answers: AnswerMap,
+  questionSet: Question[] = questions
+): ResultParts {
+  const source = calculateDimensionScore("S", answers, questionSet).winningPole as ResultParts["source"];
+  const hierarchy = calculateDimensionScore("H", answers, questionSet).winningPole as ResultParts["hierarchy"];
+  const investigation = calculateDimensionScore("I", answers, questionSet).winningPole as InvestigationPublicPole;
+  const purpose = calculateDimensionScore("P", answers, questionSet).winningPole as ResultParts["purpose"];
 
   return {
     source: toPublicPole(source) as ResultParts["source"],
@@ -99,25 +105,30 @@ export function calculateResultParts(answers: AnswerMap): ResultParts {
   };
 }
 
-export function isAssessmentComplete(answers: AnswerMap) {
+export function isAssessmentComplete(
+  answers: AnswerMap,
+  questionSet: Question[] = questions
+) {
   return ["S", "H", "I", "P"].every((dimension) =>
-    isDimensionComplete(dimension as Dimension, answers)
+    isDimensionComplete(dimension as Dimension, answers, questionSet)
   );
 }
 
 export function calculateAssessmentResult(
-  answers: AnswerMap
+  answers: AnswerMap,
+  personalitySet: Personality[] = personalities,
+  questionSet: Question[] = questions
 ): AssessmentResult | null {
-  if (!isAssessmentComplete(answers)) {
+  if (!isAssessmentComplete(answers, questionSet)) {
     return null;
   }
 
   const dimensions = (["S", "H", "I", "P"] as Dimension[]).map((dimension) =>
-    calculateDimensionScore(dimension, answers)
+    calculateDimensionScore(dimension, answers, questionSet)
   );
-  const parts = calculateResultParts(answers);
+  const parts = calculateResultParts(answers, questionSet);
   const code = getResultCode(parts);
-  const personality = personalities.find((item) => item.code === code);
+  const personality = personalitySet.find((item) => item.code === code);
 
   if (!personality) {
     throw new Error(`Missing personality payload for code ${code}`);
@@ -130,9 +141,11 @@ export function calculateAssessmentResult(
   };
 }
 
-export function getAssessmentResultByCode(code: ResultCode): AssessmentResult {
-  const personality = personalities.find((item) => item.code === code);
-
+export function getAssessmentResultByCode(
+  code: ResultCode,
+  personalitySet: Personality[] = personalities
+): AssessmentResult {
+  const personality = personalitySet.find((item) => item.code === code);
   if (!personality) {
     throw new Error(`Missing personality payload for code ${code}`);
   }

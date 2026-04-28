@@ -1,3 +1,4 @@
+import { personalitiesEn } from "../data/personalities.en";
 import { describe, expect, it } from "vitest";
 import {
   calculateDimensionScore,
@@ -49,5 +50,12 @@ describe("getAssessmentResultByCode", () => {
       "P",
       "W",
     ]);
+  });
+
+  it("can hydrate the same result code with English personality copy", () => {
+    const result = getAssessmentResultByCode("CAPW", personalitiesEn);
+
+    expect(result.code).toBe("CAPW");
+    expect(result.personality.title).toContain("Agile Burn-Down Cremator");
   });
 });

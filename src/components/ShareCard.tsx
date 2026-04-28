@@ -1,18 +1,19 @@
 import { QRCodeSVG } from "qrcode.react";
-import { dimensions } from "../data/dimensions";
-import type { AssessmentResult } from "../lib/types";
+import type { AppCopy, AssessmentResult, DimensionDefinition } from "../lib/types";
 import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
 import { SHARE_HOST_LABEL, SHARE_URL } from "../lib/share";
 
 interface ShareCardProps {
+  copy: AppCopy;
+  dimensions: DimensionDefinition[];
   result: AssessmentResult;
 }
 
-export function ShareCard({ result }: ShareCardProps) {
+export function ShareCard({ copy, dimensions, result }: ShareCardProps) {
   return (
     <div className="share-card" data-testid="share-card">
       <div className="share-card-header">
-        <p className="share-card-kicker">Programmer Personality Test</p>
+        <p className="share-card-kicker">{copy.share.kicker}</p>
         <h2>{result.code}</h2>
         <p className="share-card-title">{result.personality.title}</p>
         <p className="share-card-quote">{result.personality.quote}</p>
@@ -61,20 +62,20 @@ export function ShareCard({ result }: ShareCardProps) {
 
       <div className="share-card-sections">
         <article className="share-card-section">
-          <h3>长描述</h3>
+          <h3>{copy.resultSections.description}</h3>
           <p>{result.personality.description}</p>
         </article>
         <article className="share-card-section share-card-section--lifestyle">
-          <h3>生活与社交侧写</h3>
+          <h3>{copy.resultSections.lifestyle}</h3>
           <p>{result.personality.lifestyle}</p>
         </article>
       </div>
 
-      <p className="share-card-cta">你也来测测你的程序员人格</p>
+      <p className="share-card-cta">{copy.share.cta}</p>
 
       <div className="share-card-footer">
         <div className="share-card-url">
-          <span>Visit</span>
+          <span>{copy.share.visit}</span>
           <strong>{SHARE_HOST_LABEL}</strong>
         </div>
         <div className="share-card-qr" data-testid="share-card-qr">

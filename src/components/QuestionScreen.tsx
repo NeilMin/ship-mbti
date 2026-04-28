@@ -1,35 +1,50 @@
-import { dimensions } from "../data/dimensions";
-import type { LikertValue, Question } from "../lib/types";
+import type { AppCopy, DimensionDefinition, LikertValue, Locale, Question } from "../lib/types";
 import { LikertScale } from "./LikertScale";
+import { LocaleToggle } from "./LocaleToggle";
 import { ProgressHeader } from "./ProgressHeader";
 
 interface QuestionScreenProps {
+  copy: AppCopy;
+  dimension: DimensionDefinition | undefined;
+  locale: Locale;
   question: Question;
   questionIndex: number;
   totalQuestions: number;
   value?: LikertValue;
   onAnswer: (value: LikertValue) => void;
   onBack: () => void;
+  onLocaleChange: (locale: Locale) => void;
 }
 
 export function QuestionScreen({
+  copy,
+  dimension,
+  locale,
   question,
   questionIndex,
   totalQuestions,
   value,
   onAnswer,
   onBack,
+  onLocaleChange,
 }: QuestionScreenProps) {
-  const dimension = dimensions.find((item) => item.id === question.dimension);
-
   return (
     <section className="question-card">
-      <ProgressHeader current={questionIndex + 1} total={totalQuestions} />
+      <div className="question-toolbar">
+        <LocaleToggle label={copy.languageLabel} locale={locale} onChange={onLocaleChange} />
+      </div>
+      <ProgressHeader current={questionIndex + 1} label={copy.questionLabel} total={totalQuestions} />
       <p className="question-dimension">
         {dimension?.name} / {dimension?.label}
       </p>
       <h1 className="question-prompt">{question.prompt}</h1>
-      <LikertScale key={question.id} name={question.id} onChange={onAnswer} value={value} />
+      <LikertScale
+        key={question.id}
+        labels={copy.scaleLabels}
+        name={question.id}
+        onChange={onAnswer}
+        value={value}
+      />
       <div className="question-actions">
         <button
           className="question-button question-button--secondary"
@@ -37,7 +52,7 @@ export function QuestionScreen({
           onClick={onBack}
           type="button"
         >
-          上一题
+          {copy.backButton}
         </button>
       </div>
     </section>

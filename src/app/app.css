@@ -47,6 +47,39 @@ button {
   box-shadow: 0 24px 80px rgba(33, 54, 79, 0.12);
 }
 
+.hero-toolbar,
+.question-toolbar,
+.result-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.locale-toggle {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(223, 232, 239, 0.9);
+  gap: 4px;
+}
+
+.locale-toggle__button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: transparent;
+  color: #516879;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.locale-toggle__button--active {
+  background: #ffffff;
+  color: #173042;
+  box-shadow: 0 6px 18px rgba(33, 54, 79, 0.12);
+}
+
 .hero-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
@@ -706,6 +739,12 @@ button {
   .share-card {
     padding: 24px;
     border-radius: 24px;
+  }
+
+  .hero-toolbar,
+  .question-toolbar,
+  .result-toolbar {
+    margin-bottom: 16px;
   }
 
   .hero-layout,

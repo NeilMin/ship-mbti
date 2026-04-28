@@ -1,6 +1,7 @@
-import type { Personality } from "../lib/types";
+import type { Locale, Personality } from "../lib/types";
+import { personalitiesEn } from "./personalities.en";
 
-export const personalities: Personality[] = [
+export const personalitiesZh: Personality[] = [
   {
     code: "COLG",
     group: "CO (编排者 / Orchestrator)",
@@ -226,3 +227,10 @@ export const personalities: Personality[] = [
     environment: "极度边缘、无人问津的后台管理系统维护岗，或者准备离职前的三个月缓冲期。",
   },
 ];
+
+export const personalitySets: Record<Locale, Personality[]> = {
+  zh: personalitiesZh,
+  en: personalitiesEn,
+};
+
+export const personalities = personalitySets.zh;

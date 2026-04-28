@@ -1,6 +1,7 @@
-import type { AnswerMap } from "./types";
+import type { AnswerMap, Locale } from "./types";
 
 const STORAGE_KEY = "ship-mbti-session";
+const LOCALE_KEY = "ship-mbti-locale";
 
 export interface SessionState {
   screen: "intro" | "questions" | "result";
@@ -39,4 +40,20 @@ export function clearSessionState() {
   }
 
   window.localStorage.removeItem(STORAGE_KEY);
+}
+
+export function loadLocale(): Locale {
+  if (typeof window === "undefined") {
+    return "zh";
+  }
+
+  return window.localStorage.getItem(LOCALE_KEY) === "en" ? "en" : "zh";
+}
+
+export function saveLocale(locale: Locale) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.localStorage.setItem(LOCALE_KEY, locale);
 }
