@@ -10,7 +10,6 @@ interface QuestionScreenProps {
   value?: LikertValue;
   onAnswer: (value: LikertValue) => void;
   onBack: () => void;
-  onNext: () => void;
 }
 
 export function QuestionScreen({
@@ -20,7 +19,6 @@ export function QuestionScreen({
   value,
   onAnswer,
   onBack,
-  onNext,
 }: QuestionScreenProps) {
   const dimension = dimensions.find((item) => item.id === question.dimension);
 
@@ -31,7 +29,7 @@ export function QuestionScreen({
         {dimension?.name} / {dimension?.label}
       </p>
       <h1 className="question-prompt">{question.prompt}</h1>
-      <LikertScale name={question.id} onChange={onAnswer} value={value} />
+      <LikertScale key={question.id} name={question.id} onChange={onAnswer} value={value} />
       <div className="question-actions">
         <button
           className="question-button question-button--secondary"
@@ -40,14 +38,6 @@ export function QuestionScreen({
           type="button"
         >
           上一题
-        </button>
-        <button
-          className="question-button"
-          disabled={value === undefined}
-          onClick={onNext}
-          type="button"
-        >
-          {questionIndex === totalQuestions - 1 ? "查看结果" : "下一题"}
         </button>
       </div>
     </section>

@@ -95,13 +95,7 @@ export function App() {
       ...current,
       [currentQuestion.id]: value,
     }));
-  };
 
-  const handleBack = () => {
-    setCurrentIndex((current) => Math.max(0, current - 1));
-  };
-
-  const handleNext = () => {
     if (currentIndex === questions.length - 1) {
       setScreen("result");
       return;
@@ -110,6 +104,10 @@ export function App() {
     setCurrentIndex((current) =>
       Math.min(questions.length - 1, current + 1)
     );
+  };
+
+  const handleBack = () => {
+    setCurrentIndex((current) => Math.max(0, current - 1));
   };
 
   const handleRestart = () => {
@@ -129,7 +127,6 @@ export function App() {
         <QuestionScreen
           onBack={handleBack}
           onAnswer={handleAnswer}
-          onNext={handleNext}
           question={currentQuestion}
           questionIndex={currentIndex}
           totalQuestions={questions.length}

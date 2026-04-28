@@ -1,5 +1,6 @@
 import { toPng } from "html-to-image";
 import { useRef, useState } from "react";
+import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
 import type { AssessmentResult } from "../lib/types";
 import { ResultBars } from "./ResultBars";
 import { ShareCard } from "./ShareCard";
@@ -15,14 +16,23 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
-    if (!shareCardRef.current || isExporting) {
+    if (isExporting) {
       return;
     }
 
     setIsExporting(true);
 
     try {
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      });
+
+      if (!shareCardRef.current) {
+        return;
+      }
+
       const dataUrl = await toPng(shareCardRef.current, {
+        backgroundColor: "#edf2f7",
         cacheBust: true,
         pixelRatio: 2,
       });
@@ -38,10 +48,19 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
   return (
     <section className="result-shell">
       <div className="result-hero">
-        <p className="result-kicker">{personality.group}</p>
-        <h1 className="result-code">{result.code}</h1>
-        <h2 className="result-title">{personality.title}</h2>
-        <p className="result-quote">“{personality.quote}”</p>
+        <div className="result-hero-copy">
+          <p className="result-kicker">{personality.group}</p>
+          <h1 className="result-code">{result.code}</h1>
+          <h2 className="result-title">{personality.title}</h2>
+          <p className="result-quote">“{personality.quote}”</p>
+        </div>
+        <div className="result-hero-figure">
+          <img
+            alt={getCharacterImageAlt(result.code)}
+            className="result-hero-image"
+            src={getCharacterImageSrc(result.code)}
+          />
+        </div>
       </div>
 
       <ResultBars scores={result.dimensions} />
@@ -72,7 +91,7 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
 
       <div className="result-actions">
         <button className="question-button" onClick={handleExport} type="button">
-          {isExporting ? "导出中..." : "保存结果图"}
+          {isExporting ? "生成中..." : "保存结果图"}
         </button>
         <button
           className="question-button question-button--secondary"
@@ -83,9 +102,13 @@ export function ResultScreen({ result, onRestart }: ResultScreenProps) {
         </button>
       </div>
 
-      <div ref={shareCardRef}>
-        <ShareCard result={result} />
-      </div>
+      {isExporting ? (
+        <div className="share-export-shell">
+          <div ref={shareCardRef}>
+            <ShareCard result={result} />
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
