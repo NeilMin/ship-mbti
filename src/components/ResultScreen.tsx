@@ -6,6 +6,49 @@ import { LocaleToggle } from "./LocaleToggle";
 import { ResultBars } from "./ResultBars";
 import { ShareCard } from "./ShareCard";
 
+function dataUrlToFile(dataUrl: string, filename: string) {
+  const [header, encoded] = dataUrl.split(",");
+  const mime = header.match(/data:(.*?);base64/)?.[1] ?? "image/png";
+  const binary = window.atob(encoded);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+
+  return new File([bytes], filename, { type: mime });
+}
+
+async function sharePosterIfSupported(
+  dataUrl: string,
+  filename: string,
+  title: string
+) {
+  if (typeof navigator.share !== "function") {
+    return false;
+  }
+
+  const file = dataUrlToFile(dataUrl, filename);
+
+  if (typeof navigator.canShare === "function" && !navigator.canShare({ files: [file] })) {
+    return false;
+  }
+
+  try {
+    await navigator.share({
+      files: [file],
+      title,
+    });
+    return true;
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      return true;
+    }
+
+    return false;
+  }
+}
+
 interface ResultScreenProps {
   copy: AppCopy;
   dimensions: DimensionDefinition[];
@@ -48,8 +91,15 @@ export function ResultScreen({
         cacheBust: true,
         pixelRatio: 2,
       });
+      const filename = `${result.code}-programmer-mbti.png`;
+      const shared = await sharePosterIfSupported(dataUrl, filename, result.personality.title);
+
+      if (shared) {
+        return;
+      }
+
       const link = document.createElement("a");
-      link.download = `${result.code}-programmer-mbti.png`;
+      link.download = filename;
       link.href = dataUrl;
       link.click();
     } finally {
