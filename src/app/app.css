@@ -446,6 +446,10 @@ button {
   line-height: 1.7;
 }
 
+.result-hero-copy {
+  min-width: 0;
+}
+
 .result-hero-figure {
   display: flex;
   justify-content: center;
@@ -777,6 +781,33 @@ button {
 
   .result-grid {
     grid-template-columns: 1fr;
+  }
+
+  .result-hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .result-hero-figure {
+    order: -1;
+  }
+
+  .result-hero-image {
+    width: min(100%, 220px);
+  }
+
+  .result-code {
+    font-size: clamp(40px, 15vw, 58px);
+  }
+
+  .result-title {
+    font-size: 26px;
+    line-height: 1.28;
+  }
+
+  .result-quote {
+    font-size: 16px;
+    line-height: 1.65;
   }
 
   .result-bar-top {
