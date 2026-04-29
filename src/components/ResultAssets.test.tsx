@@ -7,9 +7,14 @@ import { ResultScreen } from "./ResultScreen";
 import { ShareCard } from "./ShareCard";
 
 const toPngMock = vi.fn();
+const trackEventMock = vi.fn();
 
 vi.mock("html-to-image", () => ({
   toPng: (...args: unknown[]) => toPngMock(...args),
+}));
+
+vi.mock("../utils/analytics", () => ({
+  trackEvent: (...args: unknown[]) => trackEventMock(...args),
 }));
 
 describe("Result artwork", () => {
@@ -98,9 +103,24 @@ describe("Result artwork", () => {
     });
 
     expect(anchorClickMock).not.toHaveBeenCalled();
+    expect(trackEventMock).toHaveBeenCalledWith(
+      "share_result_attempt",
+      expect.objectContaining({
+        personality_type: "CAPW",
+        share_platform: "native_share_sheet",
+      })
+    );
+    expect(trackEventMock).toHaveBeenCalledWith(
+      "share_result",
+      expect.objectContaining({
+        personality_type: "CAPW",
+        share_platform: "native_share_sheet",
+      })
+    );
 
     createElementSpy.mockRestore();
     vi.unstubAllGlobals();
     toPngMock.mockReset();
+    trackEventMock.mockReset();
   });
 });

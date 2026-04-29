@@ -2,6 +2,7 @@ import { toPng } from "html-to-image";
 import { useRef, useState } from "react";
 import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
 import type { AppCopy, AssessmentResult, DimensionDefinition, Locale } from "../lib/types";
+import { trackEvent } from "../utils/analytics";
 import { LocaleToggle } from "./LocaleToggle";
 import { ResultBars } from "./ResultBars";
 import { ShareCard } from "./ShareCard";
@@ -25,13 +26,13 @@ async function sharePosterIfSupported(
   title: string
 ) {
   if (typeof navigator.share !== "function") {
-    return false;
+    return "unsupported";
   }
 
   const file = dataUrlToFile(dataUrl, filename);
 
   if (typeof navigator.canShare === "function" && !navigator.canShare({ files: [file] })) {
-    return false;
+    return "unsupported";
   }
 
   try {
@@ -39,13 +40,13 @@ async function sharePosterIfSupported(
       files: [file],
       title,
     });
-    return true;
+    return "shared";
   } catch (error) {
     if (error instanceof DOMException && error.name === "AbortError") {
-      return true;
+      return "cancelled";
     }
 
-    return false;
+    return "failed";
   }
 }
 
@@ -75,6 +76,12 @@ export function ResultScreen({
       return;
     }
 
+    trackEvent("share_result_attempt", {
+      locale,
+      personality_type: result.code,
+      share_platform: typeof navigator.share === "function" ? "native_share_sheet" : "download_image",
+    });
+
     setIsExporting(true);
 
     try {
@@ -92,9 +99,23 @@ export function ResultScreen({
         pixelRatio: 2,
       });
       const filename = `${result.code}-programmer-mbti.png`;
-      const shared = await sharePosterIfSupported(dataUrl, filename, result.personality.title);
+      const shareStatus = await sharePosterIfSupported(dataUrl, filename, result.personality.title);
 
-      if (shared) {
+      if (shareStatus === "shared") {
+        trackEvent("share_result", {
+          locale,
+          personality_type: result.code,
+          share_platform: "native_share_sheet",
+        });
+        return;
+      }
+
+      if (shareStatus === "cancelled") {
+        trackEvent("share_result_cancelled", {
+          locale,
+          personality_type: result.code,
+          share_platform: "native_share_sheet",
+        });
         return;
       }
 
@@ -102,6 +123,12 @@ export function ResultScreen({
       link.download = filename;
       link.href = dataUrl;
       link.click();
+
+      trackEvent("share_result", {
+        locale,
+        personality_type: result.code,
+        share_platform: "download_image",
+      });
     } finally {
       setIsExporting(false);
     }
