@@ -82,6 +82,17 @@ describe("App", () => {
     expect(screen.getAllByRole("radio")[0]).toBeChecked();
   });
 
+  it("moves forward again when reselecting the same answer after going back", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+    fireEvent.click(screen.getByRole("button", { name: /上一题/i }));
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+
+    expect(screen.getByText(/接到陌生需求时/i)).toBeInTheDocument();
+  });
+
   it("shows a result screen after answering all questions", () => {
     render(<App />);
 

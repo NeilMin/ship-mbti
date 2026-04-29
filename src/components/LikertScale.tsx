@@ -44,7 +44,8 @@ export function LikertScale({ labels, name, value, onChange }: LikertScaleProps)
             <input
               checked={value === item.value}
               name={name}
-              onChange={() => onChange(item.value)}
+              onClick={() => onChange(item.value)}
+              onChange={() => {}}
               type="radio"
               value={item.value}
             />
