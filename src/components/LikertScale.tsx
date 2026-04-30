@@ -38,14 +38,17 @@ export function LikertScale({ labels, name, value, onChange }: LikertScaleProps)
       <div className="likert-scale__options">
         {likertScale.map((item, index) => (
           <label
-            key={item.value}
+            key={`${name}-${item.value}`}
             className={`likert-option likert-option--${index + 1}`}
           >
             <input
               checked={value === item.value}
               name={name}
-              onClick={() => onChange(item.value)}
-              onChange={() => {}}
+              onClick={(event) => {
+                event.preventDefault();
+                onChange(item.value);
+              }}
+              readOnly
               type="radio"
               value={item.value}
             />

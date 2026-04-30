@@ -93,6 +93,36 @@ describe("App", () => {
     expect(screen.getByText(/接到陌生需求时/i)).toBeInTheDocument();
   });
 
+  it("does not carry an earlier answer into the next question after revisiting answered questions", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    expect(
+      screen.getByText(/写那些毫无营养的 boilerplate 时/i)
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /上一题/i }));
+    fireEvent.click(screen.getByRole("button", { name: /上一题/i }));
+
+    expect(screen.getByText(/周五傍晚突然塞来脏活/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("radio")[0]).toBeChecked();
+
+    fireEvent.click(screen.getAllByRole("radio")[0]);
+
+    expect(screen.getByText(/接到陌生需求时/i)).toBeInTheDocument();
+    expect(screen.getAllByRole("radio")[1]).toBeChecked();
+
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+
+    expect(
+      screen.getByText(/写那些毫无营养的 boilerplate 时/i)
+    ).toBeInTheDocument();
+    expect(screen.getAllByRole("radio").every((radio) => !(radio as HTMLInputElement).checked)).toBe(true);
+  });
+
   it("shows a result screen after answering all questions", () => {
     render(<App />);
 
