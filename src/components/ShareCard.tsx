@@ -1,6 +1,7 @@
 import { QRCodeSVG } from "qrcode.react";
 import type { AppCopy, AssessmentResult, DimensionDefinition } from "../lib/types";
 import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
+import { getDimensionDisplay } from "../lib/dimensionDisplay";
 import { SHARE_HOST_LABEL, SHARE_URL } from "../lib/share";
 
 interface ShareCardProps {
@@ -35,11 +36,10 @@ export function ShareCard({ copy, dimensions, result }: ShareCardProps) {
             return null;
           }
 
-          const winnerOnLeft = score.winningPole === definition.leftPole.code;
-          const leadLabel = winnerOnLeft ? definition.leftPole.label : definition.rightPole.label;
-          const trailLabel = winnerOnLeft ? definition.rightPole.label : definition.leftPole.label;
-          const leadPercent = winnerOnLeft ? score.leftPercent : score.rightPercent;
-          const trailPercent = winnerOnLeft ? score.rightPercent : score.leftPercent;
+          const { leadLabel, trailLabel, leadPercent, trailPercent } = getDimensionDisplay(
+            definition,
+            score
+          );
 
           return (
             <article
@@ -52,7 +52,7 @@ export function ShareCard({ copy, dimensions, result }: ShareCardProps) {
                 {leadPercent}% {leadLabel} / {trailPercent}% {trailLabel}
               </p>
               <div aria-hidden="true" className="share-card-dimension-track">
-                <span className="share-card-dimension-fill" style={{ width: `${score.leftPercent}%` }} />
+                <span className="share-card-dimension-fill" style={{ width: `${leadPercent}%` }} />
               </div>
               <p className="share-card-dimension-description">{definition.description}</p>
             </article>

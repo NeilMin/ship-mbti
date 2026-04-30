@@ -1,4 +1,5 @@
 import type { DimensionDefinition, DimensionScore } from "../lib/types";
+import { getDimensionDisplay } from "../lib/dimensionDisplay";
 
 interface ResultBarsProps {
   dimensions: DimensionDefinition[];
@@ -15,6 +16,11 @@ export function ResultBars({ dimensions, scores }: ResultBarsProps) {
           return null;
         }
 
+        const { leadLabel, trailLabel, leadPercent, trailPercent } = getDimensionDisplay(
+          definition,
+          score
+        );
+
         return (
           <article key={score.dimension} className="result-bar-card">
             <div className="result-bar-top">
@@ -23,12 +29,11 @@ export function ResultBars({ dimensions, scores }: ResultBarsProps) {
                 <h3>{definition.label}</h3>
               </div>
               <p className="result-bar-score">
-                {score.leftPercent}% {definition.leftPole.label} / {score.rightPercent}%{" "}
-                {definition.rightPole.label}
+                {leadPercent}% {leadLabel} / {trailPercent}% {trailLabel}
               </p>
             </div>
             <div aria-hidden="true" className="result-track">
-              <span className="result-track-left" style={{ width: `${score.leftPercent}%` }} />
+              <span className="result-track-left" style={{ width: `${leadPercent}%` }} />
             </div>
           </article>
         );

@@ -55,6 +55,39 @@ describe("Result artwork", () => {
     expect(screen.getByTestId("share-card-qr")).toBeInTheDocument();
   });
 
+  it("keeps the displayed leading percentage aligned with the filled bar", () => {
+    const result = getAssessmentResultByCode("TOLW");
+
+    const { container } = render(
+      <>
+        <ResultScreen
+          copy={copyByLocale.zh}
+          dimensions={dimensionsZh}
+          locale="zh"
+          onLocaleChange={() => {}}
+          onRestart={() => {}}
+          result={result}
+        />
+        <ShareCard copy={copyByLocale.zh} dimensions={dimensionsZh} result={result} />
+      </>
+    );
+
+    expect(screen.getAllByText("80% Typecraft / 20% Copilot")).toHaveLength(2);
+    expect(screen.getAllByText("80% Overdesign / 20% ASAP")).toHaveLength(2);
+    expect(screen.getAllByText("80% Logic / 20% Pray")).toHaveLength(2);
+    expect(screen.getAllByText("80% Worker / 20% Geek")).toHaveLength(2);
+
+    const resultFills = Array.from(container.querySelectorAll(".result-track-left"));
+    const shareCardFills = Array.from(container.querySelectorAll(".share-card-dimension-fill"));
+
+    expect(resultFills).toHaveLength(4);
+    expect(shareCardFills).toHaveLength(4);
+
+    for (const fill of [...resultFills, ...shareCardFills]) {
+      expect(fill).toHaveStyle({ width: "80%" });
+    }
+  });
+
   it("uses the native share sheet when the browser can share files", async () => {
     const result = getAssessmentResultByCode("CAPW");
     const shareMock = vi.fn().mockResolvedValue(undefined);
