@@ -1,12 +1,71 @@
-import type { AnswerMap, Locale } from "./types";
+import type { AnswerMap, Locale, LikertValue } from "./types";
 
 const STORAGE_KEY = "ship-mbti-session";
 const LOCALE_KEY = "ship-mbti-locale";
+const SESSION_VERSION = 1;
+
+const VALID_SCREENS = new Set<SessionState["screen"]>(["intro", "questions", "result"]);
 
 export interface SessionState {
   screen: "intro" | "questions" | "result";
   currentIndex: number;
   answers: AnswerMap;
+}
+
+function isLikertValue(value: unknown): value is LikertValue {
+  return (
+    typeof value === "number" &&
+    Number.isInteger(value) &&
+    value >= 1 &&
+    value <= 7
+  );
+}
+
+function parseSession(raw: string): SessionState | null {
+  let data: unknown;
+
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+
+  if (typeof data !== "object" || data === null) {
+    return null;
+  }
+
+  const record = data as Record<string, unknown>;
+
+  if (record.version !== SESSION_VERSION) {
+    return null;
+  }
+
+  const { screen, currentIndex, answers } = record;
+
+  if (typeof screen !== "string" || !VALID_SCREENS.has(screen as SessionState["screen"])) {
+    return null;
+  }
+
+  if (typeof currentIndex !== "number" || !Number.isInteger(currentIndex) || currentIndex < 0) {
+    return null;
+  }
+
+  if (typeof answers !== "object" || answers === null) {
+    return null;
+  }
+
+  const validatedAnswers: AnswerMap = {};
+  for (const [key, value] of Object.entries(answers as Record<string, unknown>)) {
+    if (isLikertValue(value)) {
+      validatedAnswers[key] = value;
+    }
+  }
+
+  return {
+    screen: screen as SessionState["screen"],
+    currentIndex,
+    answers: validatedAnswers,
+  };
 }
 
 export function loadSessionState(): SessionState | null {
@@ -19,11 +78,7 @@ export function loadSessionState(): SessionState | null {
     return null;
   }
 
-  try {
-    return JSON.parse(raw) as SessionState;
-  } catch {
-    return null;
-  }
+  return parseSession(raw);
 }
 
 export function saveSessionState(value: SessionState) {
@@ -31,7 +86,10 @@ export function saveSessionState(value: SessionState) {
     return;
   }
 
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+  window.localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify({ version: SESSION_VERSION, ...value })
+  );
 }
 
 export function clearSessionState() {

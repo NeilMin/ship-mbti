@@ -50,4 +50,51 @@ describe("LikertScale", () => {
 
     expect(onChange).toHaveBeenCalledWith(7);
   });
+
+  it("re-emits the value when the already-selected option is clicked again", () => {
+    const onChange = vi.fn();
+
+    render(
+      <LikertScale
+        labels={{
+          strongAgree: "Strongly Agree",
+          agree: "Agree",
+          slightlyAgree: "Slightly Agree",
+          neutral: "Neutral",
+          slightlyDisagree: "Slightly Disagree",
+          disagree: "Disagree",
+          strongDisagree: "Strongly Disagree",
+        }}
+        name="S1"
+        onChange={onChange}
+        value={1}
+      />
+    );
+
+    fireEvent.click(screen.getByLabelText("Strongly Agree"));
+
+    expect(onChange).toHaveBeenCalledWith(1);
+  });
+
+  it("exposes native, operable radios rather than read-only inputs", () => {
+    render(
+      <LikertScale
+        labels={{
+          strongAgree: "Strongly Agree",
+          agree: "Agree",
+          slightlyAgree: "Slightly Agree",
+          neutral: "Neutral",
+          slightlyDisagree: "Slightly Disagree",
+          disagree: "Disagree",
+          strongDisagree: "Strongly Disagree",
+        }}
+        name="S1"
+        onChange={vi.fn()}
+      />
+    );
+
+    for (const radio of screen.getAllByRole("radio")) {
+      expect(radio).not.toHaveAttribute("readonly");
+    }
+  });
 });

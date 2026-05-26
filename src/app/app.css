@@ -47,6 +47,18 @@ button {
   box-shadow: 0 24px 80px rgba(33, 54, 79, 0.12);
 }
 
+.error-card {
+  width: min(560px, 100%);
+  padding: 48px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 80px rgba(33, 54, 79, 0.12);
+  text-align: center;
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+}
+
 .hero-toolbar,
 .question-toolbar,
 .result-toolbar {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { getAppContent } from "../data/content";
 import {
   calculateAssessmentResult,
@@ -84,9 +84,13 @@ export function App() {
     });
   }, [answers, currentIndex, screen, sharedResultCode]);
 
-  const result = sharedResultCode
-    ? getAssessmentResultByCode(sharedResultCode, content.personalities)
-    : calculateAssessmentResult(answers, content.personalities, content.questions);
+  const result = useMemo(
+    () =>
+      sharedResultCode
+        ? getAssessmentResultByCode(sharedResultCode, content.personalities)
+        : calculateAssessmentResult(answers, content.personalities, content.questions),
+    [answers, content.personalities, content.questions, sharedResultCode]
+  );
 
   useEffect(() => {
     saveLocale(locale);
@@ -143,7 +147,7 @@ export function App() {
     currentQuestion.dimension,
     currentQuestion.id,
     locale,
-    result?.code,
+    result,
     resultViewSource,
     screen,
   ]);

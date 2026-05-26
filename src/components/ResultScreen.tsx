@@ -150,7 +150,10 @@ export function ResultScreen({
           <img
             alt={getCharacterImageAlt(result.code)}
             className="result-hero-image"
+            decoding="async"
+            height={768}
             src={getCharacterImageSrc(result.code)}
+            width={768}
           />
         </div>
       </div>

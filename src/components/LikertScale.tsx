@@ -12,11 +12,12 @@ interface LikertScaleProps {
     strongDisagree: string;
   };
   name: string;
+  labelledById?: string;
   value?: LikertValue;
   onChange: (value: LikertValue) => void;
 }
 
-export function LikertScale({ labels, name, value, onChange }: LikertScaleProps) {
+export function LikertScale({ labels, name, labelledById, value, onChange }: LikertScaleProps) {
   const optionLabels = [
     labels.strongAgree,
     labels.agree,
@@ -28,8 +29,8 @@ export function LikertScale({ labels, name, value, onChange }: LikertScaleProps)
   ];
 
   return (
-    <fieldset className="likert-scale">
-      <legend className="sr-only">likert scale</legend>
+    <fieldset className="likert-scale" aria-labelledby={labelledById}>
+      <legend className="sr-only">Likert scale</legend>
       <div className="likert-scale__labels" aria-hidden="true">
         <span className="likert-scale__label likert-scale__label--agree">{labels.strongAgree}</span>
         <span className="likert-scale__label likert-scale__label--neutral">{labels.neutral}</span>
@@ -44,11 +45,12 @@ export function LikertScale({ labels, name, value, onChange }: LikertScaleProps)
             <input
               checked={value === item.value}
               name={name}
-              onClick={(event) => {
-                event.preventDefault();
-                onChange(item.value);
+              onChange={() => onChange(item.value)}
+              onClick={() => {
+                if (value === item.value) {
+                  onChange(item.value);
+                }
               }}
-              readOnly
               type="radio"
               value={item.value}
             />

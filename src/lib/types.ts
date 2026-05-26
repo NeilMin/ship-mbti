@@ -1,3 +1,5 @@
+import type { RESULT_CODES } from "./resultCodes";
+
 export type Locale = "zh" | "en";
 export type Dimension = "S" | "H" | "I" | "P";
 export type SourcePole = "C" | "T";
@@ -12,23 +14,7 @@ export type ScorePole =
   | PurposePole;
 export type LikertValue = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
-export type ResultCode =
-  | "COLG"
-  | "COLW"
-  | "COPG"
-  | "COPW"
-  | "CALG"
-  | "CALW"
-  | "CAPG"
-  | "CAPW"
-  | "TOLG"
-  | "TOLW"
-  | "TOPG"
-  | "TOPW"
-  | "TALG"
-  | "TALW"
-  | "TAPG"
-  | "TAPW";
+export type ResultCode = (typeof RESULT_CODES)[number];
 
 export interface Personality {
   code: ResultCode;

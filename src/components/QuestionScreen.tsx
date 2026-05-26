@@ -37,9 +37,12 @@ export function QuestionScreen({
       <p className="question-dimension">
         {dimension?.name} / {dimension?.label}
       </p>
-      <h1 className="question-prompt">{question.prompt}</h1>
+      <h1 className="question-prompt" id={`question-prompt-${question.id}`}>
+        {question.prompt}
+      </h1>
       <LikertScale
         key={question.id}
+        labelledById={`question-prompt-${question.id}`}
         labels={copy.scaleLabels}
         name={question.id}
         onChange={onAnswer}

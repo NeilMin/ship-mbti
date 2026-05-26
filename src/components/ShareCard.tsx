@@ -24,7 +24,10 @@ export function ShareCard({ copy, dimensions, result }: ShareCardProps) {
         <img
           alt={getCharacterImageAlt(result.code)}
           className="share-card-image"
+          decoding="async"
+          height={768}
           src={getCharacterImageSrc(result.code)}
+          width={768}
         />
       </div>
 

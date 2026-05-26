@@ -1,26 +1,12 @@
+import { RESULT_CODES } from "./resultCodes";
 import type { ResultCode } from "./types";
 
 const RESULT_KEY = "result";
-const resultCodes = new Set<ResultCode>([
-  "COLG",
-  "COLW",
-  "COPG",
-  "COPW",
-  "CALG",
-  "CALW",
-  "CAPG",
-  "CAPW",
-  "TOLG",
-  "TOLW",
-  "TOPG",
-  "TOPW",
-  "TALG",
-  "TALW",
-  "TAPG",
-  "TAPW",
-]);
+const resultCodes = new Set<ResultCode>(RESULT_CODES);
 
-export function getResultCodeFromUrl(search = window.location.search) {
+export function getResultCodeFromUrl(
+  search = typeof window === "undefined" ? "" : window.location.search
+) {
   const value = new URLSearchParams(search).get(RESULT_KEY);
   if (!value || !resultCodes.has(value as ResultCode)) {
     return null;

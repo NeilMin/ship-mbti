@@ -100,7 +100,7 @@ export function calculateResultParts(
   return {
     source: toPublicPole(source) as ResultParts["source"],
     hierarchy: toPublicPole(hierarchy) as ResultParts["hierarchy"],
-    investigation: toPublicPole(investigation) as InvestigationPublicPole,
+    investigation,
     purpose: toPublicPole(purpose) as ResultParts["purpose"],
   };
 }

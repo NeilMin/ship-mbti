@@ -1,0 +1,18 @@
+export const RESULT_CODES = [
+  "COLG",
+  "COLW",
+  "COPG",
+  "COPW",
+  "CALG",
+  "CALW",
+  "CAPG",
+  "CAPW",
+  "TOLG",
+  "TOLW",
+  "TOPG",
+  "TOPW",
+  "TALG",
+  "TALW",
+  "TAPG",
+  "TAPW",
+] as const;

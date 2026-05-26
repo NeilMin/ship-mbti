@@ -36,7 +36,10 @@ export function IntroScreen({
           <img
             alt="Programmer personality cast illustration"
             className="hero-cast-image"
+            decoding="async"
+            height={820}
             src="/hero/intro-cast.png"
+            width={1100}
           />
         </div>
       </div>
