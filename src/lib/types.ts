@@ -16,16 +16,24 @@ export type LikertValue = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export type ResultCode = (typeof RESULT_CODES)[number];
 
+export interface PersonalityRelation {
+  code: ResultCode;
+  note: string;
+}
+
 export interface Personality {
   code: ResultCode;
   group: string;
   title: string;
+  subtitle: string;
   quote: string;
   description: string;
   strengths: string;
   risks: string;
   lifestyle: string;
   environment: string;
+  nemesis: PersonalityRelation;
+  soulmate: PersonalityRelation;
 }
 
 export interface Question {

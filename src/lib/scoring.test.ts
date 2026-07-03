@@ -43,7 +43,7 @@ describe("getAssessmentResultByCode", () => {
     const result = getAssessmentResultByCode("CAPW");
 
     expect(result.code).toBe("CAPW");
-    expect(result.personality.title).toContain("敏捷燃尽火化师");
+    expect(result.personality.title).toContain("Ticket 消消乐");
     expect(result.dimensions.map((item) => item.winningPole)).toEqual([
       "C",
       "A",

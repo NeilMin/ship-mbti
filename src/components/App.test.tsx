@@ -143,7 +143,7 @@ describe("App", () => {
     render(<App />);
 
     expect(screen.getAllByText("CAPW").length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/敏捷燃尽火化师/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Ticket 消消乐/i).length).toBeGreaterThan(0);
   });
 
   it("tracks quiz start and progress events", () => {

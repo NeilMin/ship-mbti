@@ -5,6 +5,7 @@ export const personalitiesEn: Personality[] = [
     code: "COLG",
     group: "CO (Orchestrator)",
     title: "[Soylent-Powered / AGI Evangelist Architect]",
+    subtitle: "Agentic Workflow Evangelist",
     quote: "AI will replace us eventually. Before that happens, I need to refactor the world with prompts first.",
     description:
       "You are a cyberpunk optimist who already lives mentally in the post-AGI era. Handwritten code feels pre-industrial to you. You will happily spend four hours tuning a perfectly modular prompt just to make a model generate a ten-character regex. You trust large models far more than most people trust themselves, and you love talking about agentic workflows and alignment in architecture reviews. It is not that you cannot code. You just think carbon-based manual typing is a low-status interface.",
@@ -16,11 +17,20 @@ export const personalitiesEn: Personality[] = [
       "You treat food as bandwidth overhead and will gladly live on Soylent or Huel. On dates you tend to discuss the singularity, the limits of carbon life, and whether AI companionship is simply a more scalable relationship model. Being blocked afterward is common.",
     environment:
       "Best suited for AI startups with billion-dollar decks and no MVP, or for innovation labs inside large companies that are rich in vision and poor in shipping pressure.",
+    nemesis: {
+      code: "TAPW",
+      note: "You want to refactor the world with prompts; he won't even open your README.",
+    },
+    soulmate: {
+      code: "COLW",
+      note: "He doesn't believe in AGI, but he'll write your faith into a promo packet.",
+    },
   },
   {
     code: "COLW",
     group: "CO (Orchestrator)",
     title: "[Patagonia Regular / Alignment-Driven Enablement Architect]",
+    subtitle: "Cross-org Enablement & Platform Architecture Lead",
     quote: "The code does not need to be elegant. The Design Doc just needs to get me safely through perf.",
     description:
       "You are the classic Bay Area Staff-level operator who understands that naming things and managing upward are both career skills. You rarely touch the deepest implementation work yourself. Your main output is highly polished design documentation that translates ordinary software into visible impact. Copilot is not a tool to you so much as a bargain offshore team. You review its output carefully, mostly to make sure none of it damages your bonus trajectory. Your systems are usually very elaborate, but often less for the product than for self-preservation inside giant organizations where blame travels faster than truth.",
@@ -32,11 +42,20 @@ export const personalitiesEn: Personality[] = [
       "You are a devoted evangelist of Bay Area tech uniform culture: Patagonia vest, neat sneakers, and calm strategic energy. Dates may arrive with a Google Calendar invite, an agenda, and a sentence like: “I think we still need to align on our long-term goals.”",
     environment:
       "Thrives in mature big-tech organizations where documentation, consensus, review rituals, and PowerPoint theater all count as real work.",
+    nemesis: {
+      code: "TAPG",
+      note: "He codes by forum archaeology, you by slide deck — each thinks the other is faking it.",
+    },
+    soulmate: {
+      code: "COLG",
+      note: "He supplies the faith, you supply the paperwork.",
+    },
   },
   {
     code: "COPG",
     group: "CO (Orchestrator)",
     title: "[Trend-Cycle Reincarnator / Mystical Demo Architect]",
+    subtitle: "Full-cycle Innovation Incubation Expert",
     quote: "The architecture is futuristic. The errors are temporary. After a restart, greatness will return.",
     description:
       "You are a contradiction in motion: obsessed with sweeping patterns, impatient with actual debugging. Your system diagrams look like starships, but the engines are held together by glue code and AI-fabricated helpers. When production breaks, you refuse to read five hundred lines of stack trace. Instead, you draft a more spiritually powerful prompt, regenerate half the service, or restart the container and trust the universe. This is not ignorance. It is urgency. You are always trying to catch the next wave before everyone else realizes the previous one was fake.",
@@ -48,11 +67,20 @@ export const personalitiesEn: Personality[] = [
       "You were probably crypto or Web3 once, and pivoted to AI with almost no psychological friction. Your bio says things like “Serial Entrepreneur.” On dates you promise that the startup is about to hit a real round, even if you still have not bought the domain.",
     environment:
       "Ideal for hackathon finals, investor demos, and projects where a flashy prototype matters more than long-term stability.",
+    nemesis: {
+      code: "TALW",
+      note: "Every pie you pitch on stage, he bakes overtime with tears.",
+    },
+    soulmate: {
+      code: "CALG",
+      note: "You sell the story, he stitches the demo overnight.",
+    },
   },
   {
     code: "COPW",
     group: "CO (Orchestrator)",
     title: "[Tahoe Migratory Bird / Rest-and-Vest Risk Architect]",
+    subtitle: "Long-term Technical Vision Owner",
     quote: "If the abstraction layer is thick enough, accountability cannot pass through it. If releases are rare enough, the weekend stays mine.",
     description:
       "Your worldview can be summarized as TC first, ideals later. The complex AI-generated architecture you produce is not born of technical purity, but of defensive career design. If nobody fully understands the system, then nobody can easily replace you. Bugs get patched just enough to stop the bleeding, because deep investigation is an expensive hobby when your real loyalty has already been reallocated to your private life. You were probably sincere once. Then you met roadmaps, executive optimism, and corporate memory loss.",
@@ -64,11 +92,20 @@ export const personalitiesEn: Personality[] = [
       "You lurk in FIRE communities, schedule Tahoe weekends with religious precision, and can make a low-cost boba date feel like an informal compensation audit within three sentences.",
     environment:
       "Works best in comfortable vesting-heavy big-tech corners or aging product lines where strategic invisibility is rewarded.",
+    nemesis: {
+      code: "TALG",
+      note: "He wants to rewrite your system; your three rounds of design review outlast him.",
+    },
+    soulmate: {
+      code: "TOPW",
+      note: "Retirement home meets ancestral tomb: nobody touches anything.",
+    },
   },
   {
     code: "CALG",
     group: "CA (Sprinter)",
     title: "[Hacker House Resident / AIGC Prototype Stitcher]",
+    subtitle: "0-to-1 Full-stack Growth Engineer",
     quote: "Please do not talk to me about standards. Claude and I just assembled the MVP.",
     description:
       "You are a modern descendant of hacker culture with almost no interest in elegance for its own sake. What matters is whether the idea in your head can become something real before the mood evaporates. You stitch together model APIs, open-source tools, and suspicious snippets like a cyberpunk quilter on deadline. You will make sure the logic basically works, but indentation quality and future maintainability are problems for a different civilization. In your value system, ugly code that runs today is always worth more than perfect architecture that never leaves your notebook.",
@@ -80,11 +117,20 @@ export const personalitiesEn: Personality[] = [
       "You probably live in or spiritually belong to a hacker house. Your wardrobe is mostly stale hackathon T-shirts. A date can turn into a seed-round pitch with almost no warning if a million-dollar idea interrupts dinner.",
     environment:
       "Best in very early-stage startup environments, YC-style prototype sprints, or short-lived exploratory projects where speed is the only moral law.",
+    nemesis: {
+      code: "TOPW",
+      note: "Every npm install you run is a rave on his ancestral grave.",
+    },
+    soulmate: {
+      code: "COPG",
+      note: "He draws the pie in the sky, you stitch the demo that runs.",
+    },
   },
   {
     code: "CALW",
     group: "CA (Sprinter)",
     title: "[ROI Problem-Solver / KPI-Oriented LLM Foreman]",
+    subtitle: "Outcome-driven Delivery Lead",
     quote: "My greatest engineering skill is knowing within five seconds whether this pile of AI code is worth saving personally.",
     description:
       "You have already accepted the corporate truth: programming is a salary extraction mechanism with expensive rent attached. Large models are free junior contractors to you. Your daily work consists of hammering accept on generated suggestions and then coldly reviewing them for logic holes that might hurt visible impact. You gravitate toward work that pays off immediately and avoid foundational refactors because refactors rarely show up in KPI narratives. This is not a failure of character. It is a highly optimized adaptation to a workplace that rewards outcomes more than craft.",
@@ -96,11 +142,20 @@ export const personalitiesEn: Personality[] = [
       "You optimize everything, including romance. Dating apps, Notion scoring, scripts, metrics, and efficiency frameworks all feel natural to you. If a relationship cannot be quantified, it makes you mildly suspicious.",
     environment:
       "Most at home on high-pressure business teams where result-oriented evaluation outranks technical depth every quarter.",
+    nemesis: {
+      code: "TOPG",
+      note: "His aesthetics have no line item in your ROI sheet.",
+    },
+    soulmate: {
+      code: "CAPW",
+      note: "You score the ROI, he clears the tickets — zero emotional overhead.",
+    },
   },
   {
     code: "CAPG",
     group: "CA (Sprinter)",
     title: "[Night Climber / Opportunistic Hacker]",
+    subtitle: "Human-AI Pair Programming Pioneer",
     quote: "I do not know why it runs. I only know it can demo tonight, and that is enough.",
     description:
       "You code almost entirely by instinct. There is no design doc, just momentum. Problems go straight into ChatGPT, answers come back out, and whatever compiles becomes part of the product. Your workflow has strong ritual energy: copy, paste, retry, improvise, repeat. You genuinely love technology, but the love is directed toward shiny new frameworks and velocity, not toward understanding how computers really work. You represent one of the oldest truths in engineering: reckless enthusiasm can sometimes brute-force its own miracles.",
@@ -112,11 +167,20 @@ export const personalitiesEn: Personality[] = [
       "Your sleep cycle is a rumor. Bouldering sounds like a valid first date. Missing plans because you were up all night repairing the outage you caused is not unusual.",
     environment:
       "Great fit for indie hacker life, toys, experiments, and any project where concurrency, security, and long-term ownership remain distant concerns.",
+    nemesis: {
+      code: "TOLW",
+      note: "Your PR gets seven layers of comments and seven days of silence from him.",
+    },
+    soulmate: {
+      code: "TAPG",
+      note: "You ask the AI, he asks the forums; at dawn you swap answers.",
+    },
   },
   {
     code: "CAPW",
     group: "CA (Sprinter)",
     title: "[Social Dead Zone / Agile Burn-Down Cremator]",
+    subtitle: "Senior Agile Delivery Specialist",
     quote: "If I can drag the ticket to Done before five, I am willing to accept that the code may be haunted.",
     description:
       "You are an emotionally neutral Jira disposal unit. You feel no moral attachment to code quality and little long-term concern for the system’s spiritual condition. Requirement comes in, AI gets queried, snippets get pasted, local run stops screaming, PR gets opened. If a reviewer complains, a variable name changes and the ritual continues. Debugging means console.log, vibes, and restart. You are not creating software so much as transporting AI residue into production. This does not mean you are incapable. It means you have correctly concluded that treating employer code as art is a poor use of a mortal life.",
@@ -128,11 +192,20 @@ export const personalitiesEn: Personality[] = [
       "Your social battery is minimal. Games beat hiking, and complicated romance feels suspiciously like unpaid backlog. If a relationship starts resembling ticket triage, your instinct is to de-prioritize it.",
     environment:
       "Thrives in outsourced delivery pipelines, vendor-style project teams, or any setup where shipping the artifact matters more than inheriting it.",
+    nemesis: {
+      code: "TOLG",
+      note: "His review runs three thousand words; you reply with one: done.",
+    },
+    soulmate: {
+      code: "CALW",
+      note: "He scores the ROI, you clear the tickets — zero emotional overhead.",
+    },
   },
   {
     code: "TOLG",
     group: "TO (Architect)",
     title: "[Blue-Switch Ascetic / Fundamentalist Type Monk]",
+    subtitle: "Chair, Code Quality Committee",
     quote: "If anyone writes `any` in my TypeScript project, they deserve judgment in code review.",
     description:
       "You are classical geek energy distilled into one person, equal parts resident deity and maintainability hazard. You distrust dependence on AI and believe only hand-derived generics and design patterns are spiritually pure. When something breaks, you will read C++ source before admitting defeat. Your code can be beautiful enough to frame, but you are fully capable of inventing four interfaces for a button color change. In a chaotic age, you defend the last fragments of software dignity, even when everyone around you finds that slightly exhausting.",
@@ -144,11 +217,20 @@ export const personalitiesEn: Personality[] = [
       "You sit near the top of the nerd caste system. Loud custom mechanical keyboards, GitHub streaks, and quiet judgment about other people’s operating systems all fit the profile.",
     environment:
       "Best placed on infrastructure teams, open-source core maintainership, or slower research-heavy engineering groups that can tolerate craft over speed.",
+    nemesis: {
+      code: "CAPW",
+      note: "You wrote three thousand words of review; he replied: done.",
+    },
+    soulmate: {
+      code: "TOLW",
+      note: "The only two people who can read each other's code — one for purity, one for leveling.",
+    },
   },
   {
     code: "TOLW",
     group: "TO (Architect)",
     title: "[School-District Preservationist / Promotion Moat Engineer]",
+    subtitle: "Sole Owner, Core Systems",
     quote: "Seven layers of abstraction are not for the business. They are for next year’s promo packet.",
     description:
       "You are a master of big-tech career topology. You insist on handwritten core code and serious abstraction, but not out of romance. You do it because complexity, if properly staged, becomes evidence of strategic value during promotion season. Your preferred organizational defense is the deep technical moat: a system so intricate that every small request has to route through you. In other words, you play workplace politics with real engineering tools and almost no guilt.",
@@ -160,11 +242,20 @@ export const personalitiesEn: Personality[] = [
       "Dates can feel suspiciously like recruiting screens. Career planning, tax strategy, and school-district real estate all live comfortably inside your romantic imagination.",
     environment:
       "Ideal for large tech companies that love architecture reviews, hierarchy, visibility narratives, and strategic complexity.",
+    nemesis: {
+      code: "CAPG",
+      note: "Calling his code AI-generated flatters it; your rejection reasons could fill a weekly report.",
+    },
+    soulmate: {
+      code: "TOLG",
+      note: "He guards the code's purity, you guard your level; your abysses share one river.",
+    },
   },
   {
     code: "TOPG",
     group: "TO (Architect)",
     title: "[Manual Brew Perfectionist / Aesthetic Systems Artisan]",
+    subtitle: "Guardian of Engineering Aesthetics & Best Practices",
     quote: "The design was perfect. If production disagrees, production is the less elegant party.",
     description:
       "You are an aesthetic craftsperson living one layer removed from reality. You spend enormous energy hand-shaping intricate systems because beauty matters to you in a way that is almost moral. Yet once that beautifully overdesigned system collides with ugly production behavior, your patience for low-level debugging evaporates. Instead of tracing deeply, you begin performing little rituals around the code and hope harmony returns. You are not unserious. You are simply a romantic trapped inside distributed systems.",
@@ -176,11 +267,20 @@ export const personalitiesEn: Personality[] = [
       "You probably own expensive coffee gear and can explain processing methods at socially dangerous length. You appreciate refinement in almost everything, except low-level domestic failures that require blunt practical action.",
     environment:
       "A strong fit for research-minded teams, interface-heavy work, or environments where elegance and craft matter at least as much as speed.",
+    nemesis: {
+      code: "CALW",
+      note: "He files your aesthetics under performance art, not KPI-relevant.",
+    },
+    soulmate: {
+      code: "TAPW",
+      note: "You forbid touching the code, he never wanted to — a holy alliance of the status quo.",
+    },
   },
   {
     code: "TOPW",
     group: "TO (Architect)",
     title: "[RSU Night Watch / Ice-Age Change Gatekeeper]",
+    subtitle: "Core System Stability Owner",
     quote: "The most stable system is not the one without bugs. It is the one nobody dares to touch.",
     description:
       "You are the veteran guardian of brittle stability. You trust your own old hand-built frameworks and regard rapid iteration as an invitation to weekend pain. New changes are threatening not because innovation is bad, but because you understand how fragile the existing equilibrium really is. Your countermeasure is strict architectural policy: if the standards are heavy enough, product requests slow down before they can endanger your peace. You are not anti-innovation in theory. You are just deeply, soberly pro-survival.",
@@ -192,11 +292,20 @@ export const personalitiesEn: Personality[] = [
       "Your life is orderly, property-aware, and emotionally indexed to vesting schedules. In relationships, dependability and practical partnership matter far more than novelty.",
     environment:
       "Works best in core systems for banks, finance, or long-lived legacy products where stability is a stronger currency than innovation.",
+    nemesis: {
+      code: "CALG",
+      note: "He imports more dependencies in one night than you've approved in ten years.",
+    },
+    soulmate: {
+      code: "COPW",
+      note: "His retirement home, your ancestral tomb: nobody touches anything.",
+    },
   },
   {
     code: "TALG",
     group: "TA (Builder)",
     title: "[Shorts-All-Year / Garage Prototype Maniac]",
+    subtitle: "Lead, Hard Problem Strike Team",
     quote: "By the time AI finishes answering, I have already hand-written the core logic and drained the memory leak.",
     description:
       "You are the purest form of hands-on hacker energy. Bloated architecture and sluggish AI assistance both offend your nervous system. Your fingers move at the speed your brain wants to move, and you prefer direct logic, hard source dives, and real momentum over ceremony. Your guiding belief is simple: if the core loop closes, it can ship. In an industry full of abstraction and performance language, you still retain the original bodily memory of building things because they can be built.",
@@ -208,11 +317,20 @@ export const personalitiesEn: Personality[] = [
       "You probably enjoy physical exertion almost as much as technical challenge. Shorts in the cold, long hikes, and activity-heavy dates all make sense in your world.",
     environment:
       "Best used in hard-tech startups, graphics-heavy systems, infrastructure sprints, or any environment that rewards technical force over ceremony.",
+    nemesis: {
+      code: "COPW",
+      note: "You said this needs a rewrite; his third design-review invite is already on your calendar.",
+    },
+    soulmate: {
+      code: "TALW",
+      note: "You breach, he holds the line — the only healthy relationship here.",
+    },
   },
   {
     code: "TALW",
     group: "TA (Builder)",
     title: "[Costco Supply Run / Fast-and-Reliable Delivery Mason]",
+    subtitle: "Cornerstone Engineer, Core Business",
     quote: "Do not pitch me on vision or empowerment. Give me the requirement, the timeline, and let me go home to my dog.",
     description:
       "You are the stable middle beam of the software labor market. You do not worship AI, and you do not cosplay architecture. You write straightforward code with your own hands, read logs like an experienced mechanic, and care more about reliable delivery than technical theater. To you, code is a trade: respectable, practical, and in service of a real life outside the repo. In a noisy industry, your realism can feel almost radical.",
@@ -224,11 +342,20 @@ export const personalitiesEn: Personality[] = [
       "You are practical to the point of tenderness. Costco runs, normal adult logistics, and a clear-eyed sense of what actually matters all show up in how you live and date.",
     environment:
       "Excellent fit for healthy mid-to-large product teams where the business needs reliable engineering more than heroic self-mythology.",
+    nemesis: {
+      code: "COPG",
+      note: "He pitches the second growth curve on stage; you fix his last project's bugs below.",
+    },
+    soulmate: {
+      code: "TALG",
+      note: "He charges, you hold the line — the only healthy relationship here.",
+    },
   },
   {
     code: "TAPG",
     group: "TA (Builder)",
     title: "[Reddit Surfer / Stack Overflow Patchwork Artist]",
+    subtitle: "Open-source Community Resource Integrator",
     quote: "I recognize every line of this code separately. Why it works together is a conversation with fate.",
     description:
       "You are a passionate but slightly feral engineer who prefers internet archaeology to AI hand-holding. GitHub issues, forum threads, blog posts, and old answers are your natural habitat. You manually stitch together other people’s discoveries with determination and decent instincts, even if the underlying theory is occasionally missing in action. Your relationship with bugs is basically ritualistic optimism: one more reinstall, one more restart, one more lucky forum post.",
@@ -240,11 +367,20 @@ export const personalitiesEn: Personality[] = [
       "You live online comfortably and speak meme as a native language. Dates may be clumsy in planning but often recover through humor, persistence, and a refusal to die of embarrassment.",
     environment:
       "Good fit for games, front-end experiments, lightweight freelance work, or peripheral business systems where speed matters more than theoretical purity.",
+    nemesis: {
+      code: "COLW",
+      note: "You think he codes by PowerPoint; he thinks you code by luck. You're both right.",
+    },
+    soulmate: {
+      code: "CAPG",
+      note: "He confesses to the AI at 3 a.m., you excavate forum threads; at dawn you trade findings.",
+    },
   },
   {
     code: "TAPW",
     group: "TA (Builder)",
     title: "[Quiet Quitting Disciple / Defensive CRUD Specialist]",
+    subtitle: "Legacy System Maintenance Specialist",
     quote: "If this CRUD path is still breathing, there is no compelling reason for me to optimize it proactively.",
     description:
       "You are the final form of workplace detachment in software. New architectures do not tempt you. Fancy reasoning does not tempt you. Even AI feels like too much emotional administration. You reuse old code, rename fields, apply patches when necessary, and preserve your finite life force for things that are not owned by your employer. This is not simple laziness. It is a mature reading of how modern software factories often reward restraint over initiative.",
@@ -256,5 +392,13 @@ export const personalitiesEn: Personality[] = [
       "You project a distinct “I have seen through it all” fatigue. When people get excited about jumping jobs for larger packages, you tend to respond with some variation of: that sounds exhausting.",
     environment:
       "Most at home in neglected admin systems, maintenance-heavy internal tools, or the strange psychological waiting room before leaving a job.",
+    nemesis: {
+      code: "COLG",
+      note: "He sends AGI essays at midnight; your read receipt is the whole reply.",
+    },
+    soulmate: {
+      code: "TOPG",
+      note: "He can't stand people touching the code; you never planned to.",
+    },
   },
 ];

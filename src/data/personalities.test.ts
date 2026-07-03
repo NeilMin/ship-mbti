@@ -28,3 +28,46 @@ describe("personality completeness", () => {
     }
   });
 });
+
+const MIRROR: Record<string, string> = {
+  C: "T",
+  T: "C",
+  O: "A",
+  A: "O",
+  L: "P",
+  P: "L",
+  G: "W",
+  W: "G",
+};
+
+describe("personality social hooks", () => {
+  for (const [locale, set] of Object.entries(locales)) {
+    it(`${locale} gives every personality a subtitle`, () => {
+      for (const item of set) {
+        expect(item.subtitle.trim().length, item.code).toBeGreaterThan(0);
+      }
+    });
+
+    it(`${locale} points nemesis at the four-letter mirror type`, () => {
+      for (const item of set) {
+        const mirror = item.code
+          .split("")
+          .map((letter) => MIRROR[letter])
+          .join("");
+        expect(item.nemesis.code, item.code).toBe(mirror);
+        expect(item.nemesis.note.trim().length, item.code).toBeGreaterThan(0);
+      }
+    });
+
+    it(`${locale} keeps soulmate pairs symmetric and not self`, () => {
+      const byCode = new Map(set.map((item) => [item.code, item]));
+      for (const item of set) {
+        expect(item.soulmate.code, item.code).not.toBe(item.code);
+        const partner = byCode.get(item.soulmate.code);
+        expect(partner, item.soulmate.code).toBeDefined();
+        expect(partner?.soulmate.code, item.code).toBe(item.code);
+        expect(item.soulmate.note.trim().length, item.code).toBeGreaterThan(0);
+      }
+    });
+  }
+});
