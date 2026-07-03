@@ -20,9 +20,9 @@ describe("App", () => {
 
   it("renders the landing call to action", () => {
     render(<App />);
-    expect(screen.getByRole("button", { name: /开始测试/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /开始鉴定/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "程序员人格测试" })).toBeInTheDocument();
-    expect(screen.getByText("一个有趣的程序员人格测试。")).toBeInTheDocument();
+    expect(screen.getByText("20 道题，鉴定你是哪一种码农。准到你想举报。")).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /programmer personality cast illustration/i })).toBeInTheDocument();
   });
 
@@ -46,7 +46,7 @@ describe("App", () => {
   it("shows the first question after starting the assessment", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
 
     expect(screen.getByText(/周五下午来的活/i)).toBeInTheDocument();
     expect(screen.getAllByRole("radio")).toHaveLength(7);
@@ -55,7 +55,7 @@ describe("App", () => {
   it("moves to the next question immediately after answering", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
 
     expect(screen.getByText(/去哪吃饭、旅游怎么玩/i)).toBeInTheDocument();
@@ -64,7 +64,7 @@ describe("App", () => {
   it("does not carry the previous answer into the next question", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
 
     expect(screen.getByText(/去哪吃饭、旅游怎么玩/i)).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("App", () => {
   it("keeps the previous answer when navigating back", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
     fireEvent.click(screen.getByRole("button", { name: /上一题/i }));
 
@@ -85,7 +85,7 @@ describe("App", () => {
   it("moves forward again when reselecting the same answer after going back", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
     fireEvent.click(screen.getByRole("button", { name: /上一题/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
@@ -96,7 +96,7 @@ describe("App", () => {
   it("does not carry an earlier answer into the next question after revisiting answered questions", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
     fireEvent.click(screen.getAllByRole("radio")[1]);
 
@@ -126,7 +126,7 @@ describe("App", () => {
   it("shows a result screen after answering all questions", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
 
     for (let index = 0; index < 19; index += 1) {
       fireEvent.click(screen.getAllByRole("radio")[0]);
@@ -149,7 +149,7 @@ describe("App", () => {
   it("tracks quiz start and progress events", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: /开始测试/i }));
+    fireEvent.click(screen.getByRole("button", { name: /开始鉴定/i }));
     fireEvent.click(screen.getAllByRole("radio")[0]);
 
     expect(trackEventMock).toHaveBeenCalledWith(

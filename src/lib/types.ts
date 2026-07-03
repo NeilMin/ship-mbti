@@ -110,6 +110,8 @@ export interface AppCopy {
     risks: string;
     environment: string;
     lifestyle: string;
+    nemesis: string;
+    soulmate: string;
   };
   resultButtons: {
     saveImage: string;

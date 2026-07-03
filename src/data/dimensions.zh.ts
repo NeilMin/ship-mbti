@@ -14,7 +14,7 @@ export const dimensionsZh: DimensionDefinition[] = [
     rightPole: {
       code: "T",
       label: "Typecraft",
-      shortLabel: "手工打磨",
+      shortLabel: "古法手写",
     },
   },
   {

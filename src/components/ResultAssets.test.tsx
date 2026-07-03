@@ -49,8 +49,8 @@ describe("Result artwork", () => {
     expect(screen.getByText("你更依赖 AI 和现成骨架，还是更相信自己亲手把逻辑敲出来。")).toBeInTheDocument();
     expect(screen.getByText("80% Pray / 20% Logic")).toBeInTheDocument();
     expect(screen.getByText("80% Worker / 20% Geek")).toBeInTheDocument();
-    expect(screen.getByText("长描述")).toBeInTheDocument();
-    expect(screen.getByText("生活与社交侧写")).toBeInTheDocument();
+    expect(screen.getByText("行为观察报告")).toBeInTheDocument();
+    expect(screen.getByText("下班后目击报告")).toBeInTheDocument();
     expect(screen.getByText("mbti.neilmin.com")).toBeInTheDocument();
     expect(screen.getByTestId("share-card-qr")).toBeInTheDocument();
   });
@@ -129,7 +129,7 @@ describe("Result artwork", () => {
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "保存结果图" }));
+    fireEvent.click(screen.getByRole("button", { name: "保存海报" }));
 
     await waitFor(() => {
       expect(shareMock).toHaveBeenCalledTimes(1);

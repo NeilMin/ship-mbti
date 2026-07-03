@@ -4,10 +4,10 @@ export const copyByLocale: Record<Locale, AppCopy> = {
   zh: {
     heroKicker: "Programmer Personality Test",
     heroTitle: "程序员人格测试",
-    heroSubtitle: "一个有趣的程序员人格测试。",
+    heroSubtitle: "20 道题，鉴定你是哪一种码农。准到你想举报。",
     heroNote:
-      "从 AI 依赖、架构洁癖、排错玄学，到你到底是技术理想主义者还是准点下班派，这套测试会给你一个很像真的答案。",
-    startButton: "开始测试",
+      "AI 依赖、架构洁癖、排错玄学、上班动机——四个维度交叉出 16 种码农。测完拿到你的行为观察报告、你的天敌，和你的灵魂搭子。",
+    startButton: "开始鉴定",
     languageLabel: "语言",
     questionLabel: "问题",
     scaleLabels: {
@@ -21,20 +21,22 @@ export const copyByLocale: Record<Locale, AppCopy> = {
     },
     backButton: "上一题",
     resultSections: {
-      description: "长描述",
-      strengths: "核心优势",
-      risks: "致命风险",
-      environment: "适宜环境",
-      lifestyle: "生活与社交侧写",
+      description: "行为观察报告",
+      strengths: "公司还留着你的理由",
+      risks: "迟早要出的事故",
+      environment: "适合关押你的地方",
+      lifestyle: "下班后目击报告",
+      nemesis: "天敌",
+      soulmate: "灵魂搭子",
     },
     resultButtons: {
-      saveImage: "保存结果图",
+      saveImage: "保存海报",
       generatingImage: "生成中...",
-      restart: "重新测试",
+      restart: "再测一次",
     },
     share: {
       kicker: "Programmer Personality Test",
-      cta: "你也来测测你的程序员人格",
+      cta: "扫码鉴定你是哪种码农",
       visit: "Visit",
     },
   },
@@ -63,6 +65,8 @@ export const copyByLocale: Record<Locale, AppCopy> = {
       risks: "Risks",
       environment: "Best Environment",
       lifestyle: "Lifestyle & Social Profile",
+      nemesis: "Nemesis",
+      soulmate: "Soulmate",
     },
     resultButtons: {
       saveImage: "Save Result Poster",
