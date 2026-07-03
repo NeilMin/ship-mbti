@@ -6,7 +6,7 @@ export const questionsEn: Question[] = [
     dimension: "S",
     kind: "scenario",
     prompt:
-      "When Friday-night grunt work lands on my desk, my first instinct is to let AI like Gemini, Claude, or Copilot spit out a shippable skeleton.",
+      "When work lands on my desk Friday afternoon, I toss it to AI first and see what comes back.",
     agreementPole: "C",
     disagreementPole: "T",
   },
@@ -15,7 +15,7 @@ export const questionsEn: Question[] = [
     dimension: "S",
     kind: "scenario",
     prompt:
-      "When I inherit an unfamiliar task, I would rather ask AI for an 80%-correct scaffold than start by reading docs and old code.",
+      "Not just code — where to eat, how to travel: I ask AI for a plan first.",
     agreementPole: "C",
     disagreementPole: "T",
   },
@@ -24,16 +24,16 @@ export const questionsEn: Question[] = [
     dimension: "S",
     kind: "scenario",
     prompt:
-      "When the work is pure boilerplate, I would rather spend time refining a prompt than dirty my own hands typing the same thing again.",
-    agreementPole: "C",
-    disagreementPole: "T",
+      "Assembling furniture or fixing small appliances, I enjoy doing it with my own hands.",
+    agreementPole: "T",
+    disagreementPole: "C",
   },
   {
     id: "S4",
     dimension: "S",
     kind: "scenario",
     prompt:
-      "When a reviewer leaves a nasty CL or PR comment, I am more likely to throw it into a model and ask for comeback language than re-derive the logic myself.",
+      "When a reviewer pushes back, I paste the comment into AI and ask for a comeback.",
     agreementPole: "C",
     disagreementPole: "T",
   },
@@ -42,7 +42,7 @@ export const questionsEn: Question[] = [
     dimension: "S",
     kind: "attitude",
     prompt:
-      "Even when AI-generated code already passes tests, I still want to rewrite the core logic by hand or I do not trust it.",
+      "If AI wrote the core logic, I can't ship it until I've rewritten it by hand.",
     agreementPole: "T",
     disagreementPole: "C",
   },
@@ -51,7 +51,7 @@ export const questionsEn: Question[] = [
     dimension: "H",
     kind: "scenario",
     prompt:
-      "Even for a tiny internal tool, my brain immediately jumps to decoupling, layering, and future extensibility.",
+      "When I travel, I build an hour-by-hour itinerary — with a Plan B.",
     agreementPole: "O",
     disagreementPole: "A",
   },
@@ -60,7 +60,7 @@ export const questionsEn: Question[] = [
     dimension: "H",
     kind: "scenario",
     prompt:
-      "Even when something is just CRUD, I still feel the urge to turn it into a platform-level reusable service.",
+      "It's just CRUD, but I'm already planning how it becomes a platform.",
     agreementPole: "O",
     disagreementPole: "A",
   },
@@ -69,7 +69,7 @@ export const questionsEn: Question[] = [
     dimension: "H",
     kind: "scenario",
     prompt:
-      "Before the feature even lands, I am already thinking about scalability, backward compatibility, and HA.",
+      "The feature isn't approved yet, and I'm already worried about scaling it three years out.",
     agreementPole: "O",
     disagreementPole: "A",
   },
@@ -78,7 +78,7 @@ export const questionsEn: Question[] = [
     dimension: "H",
     kind: "scenario",
     prompt:
-      "If it can survive the week and make it to prod tonight, I am perfectly willing to ship a tactical patch first.",
+      "If it can ship tonight and survive the week, it's a good version.",
     agreementPole: "A",
     disagreementPole: "O",
   },
@@ -87,7 +87,7 @@ export const questionsEn: Question[] = [
     dimension: "H",
     kind: "attitude",
     prompt:
-      "Rather than sit through more design reviews in the name of architecture purity, I would rather release now and clean up debt later.",
+      "No itineraries for me: book the flight, figure it out after landing.",
     agreementPole: "A",
     disagreementPole: "O",
   },
@@ -96,7 +96,7 @@ export const questionsEn: Question[] = [
     dimension: "I",
     kind: "scenario",
     prompt:
-      "When production breaks, my first move is usually logs, traces, and recent diffs, not a lucky restart.",
+      "When prod breaks, I go straight to logs and recent diffs — never a blind restart.",
     agreementPole: "L",
     disagreementPole: "R",
   },
@@ -105,7 +105,7 @@ export const questionsEn: Question[] = [
     dimension: "I",
     kind: "scenario",
     prompt:
-      "When a bug is nearly impossible to reproduce, I would rather add a defensive restart script than die on the hill of root cause analysis.",
+      "For a bug I can't reproduce, I'll write a scheduled-restart script as a stopgap.",
     agreementPole: "R",
     disagreementPole: "L",
   },
@@ -114,7 +114,7 @@ export const questionsEn: Question[] = [
     dimension: "I",
     kind: "scenario",
     prompt:
-      "If everything works locally but production explodes, I usually start by sprinkling print statements or console logs everywhere before reading source.",
+      "Works locally, explodes in prod — my first move is console.log everywhere.",
     agreementPole: "R",
     disagreementPole: "L",
   },
@@ -122,8 +122,7 @@ export const questionsEn: Question[] = [
     id: "I4",
     dimension: "I",
     kind: "attitude",
-    prompt:
-      "If the service is back up, I can live with not understanding the full root cause of this incident yet.",
+    prompt: "Weird noise in the car? Turn the music up.",
     agreementPole: "R",
     disagreementPole: "L",
   },
@@ -132,7 +131,7 @@ export const questionsEn: Question[] = [
     dimension: "I",
     kind: "attitude",
     prompt:
-      "If I do not understand why something broke and why the fix works, I am not really done for the day.",
+      "If I don't know why it broke and why the fix works, I can't call it a day.",
     agreementPole: "L",
     disagreementPole: "R",
   },
@@ -141,7 +140,7 @@ export const questionsEn: Question[] = [
     dimension: "P",
     kind: "attitude",
     prompt:
-      "Even without perf credit or bonus money, I would still spend weekends building side projects, tools, or weird technical ideas.",
+      "No perf credit, no pay — I'd still build things for fun on weekends.",
     agreementPole: "G",
     disagreementPole: "W",
   },
@@ -150,7 +149,7 @@ export const questionsEn: Question[] = [
     dimension: "P",
     kind: "scenario",
     prompt:
-      "If my company runs a hackathon, a 20% project, or a new-model pilot, I would genuinely want in rather than just perform enthusiasm.",
+      "NAS, home router, smart home — my homelab gets more of me than my job does.",
     agreementPole: "G",
     disagreementPole: "W",
   },
@@ -159,7 +158,7 @@ export const questionsEn: Question[] = [
     dimension: "P",
     kind: "attitude",
     prompt:
-      "Thoughts of perf review, promo, or getting PIPed motivate me more consistently than the technology itself.",
+      "What keeps me working isn't passion. It's perf, promo, and PIP.",
     agreementPole: "W",
     disagreementPole: "G",
   },
@@ -168,7 +167,7 @@ export const questionsEn: Question[] = [
     dimension: "P",
     kind: "attitude",
     prompt:
-      "H1B, PERM, or layoff pressure materially shapes the kinds of jobs and risks I am willing to take.",
+      "Visa and layoff pressure genuinely shape which risks I take.",
     agreementPole: "W",
     disagreementPole: "G",
   },
@@ -177,7 +176,7 @@ export const questionsEn: Question[] = [
     dimension: "P",
     kind: "attitude",
     prompt:
-      "If I can log off on time, I usually do not volunteer to donate another evening of brainpower to my employer.",
+      "Two hours in line at a new restaurant beats one more look at code.",
     agreementPole: "W",
     disagreementPole: "G",
   },
