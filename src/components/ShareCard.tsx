@@ -1,5 +1,10 @@
 import { QRCodeSVG } from "qrcode.react";
-import type { AppCopy, AssessmentResult, DimensionDefinition } from "../lib/types";
+import type {
+  AppCopy,
+  AssessmentResult,
+  DimensionDefinition,
+  Personality,
+} from "../lib/types";
 import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
 import { getDimensionDisplay } from "../lib/dimensionDisplay";
 import { SHARE_HOST_LABEL, SHARE_URL } from "../lib/share";
@@ -7,16 +12,25 @@ import { SHARE_HOST_LABEL, SHARE_URL } from "../lib/share";
 interface ShareCardProps {
   copy: AppCopy;
   dimensions: DimensionDefinition[];
+  personalities: Personality[];
   result: AssessmentResult;
 }
 
-export function ShareCard({ copy, dimensions, result }: ShareCardProps) {
+export function ShareCard({ copy, dimensions, personalities, result }: ShareCardProps) {
+  const nemesisTitle = personalities.find(
+    (item) => item.code === result.personality.nemesis.code
+  )?.title;
+  const soulmateTitle = personalities.find(
+    (item) => item.code === result.personality.soulmate.code
+  )?.title;
+
   return (
     <div className="share-card" data-testid="share-card">
       <div className="share-card-header">
         <p className="share-card-kicker">{copy.share.kicker}</p>
         <h2>{result.code}</h2>
         <p className="share-card-title">{result.personality.title}</p>
+        <p className="share-card-subtitle">{result.personality.subtitle}</p>
         <p className="share-card-quote">{result.personality.quote}</p>
       </div>
 
@@ -73,6 +87,11 @@ export function ShareCard({ copy, dimensions, result }: ShareCardProps) {
           <p>{result.personality.lifestyle}</p>
         </article>
       </div>
+
+      <p className="share-card-relations">
+        {copy.resultSections.nemesis}：{result.personality.nemesis.code} · {nemesisTitle}
+        ｜{copy.resultSections.soulmate}：{result.personality.soulmate.code} · {soulmateTitle}
+      </p>
 
       <p className="share-card-cta">{copy.share.cta}</p>
 

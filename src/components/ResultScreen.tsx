@@ -1,7 +1,13 @@
 import { toPng } from "html-to-image";
 import { useRef, useState } from "react";
 import { getCharacterImageAlt, getCharacterImageSrc } from "../lib/characterImages";
-import type { AppCopy, AssessmentResult, DimensionDefinition, Locale } from "../lib/types";
+import type {
+  AppCopy,
+  AssessmentResult,
+  DimensionDefinition,
+  Locale,
+  Personality,
+} from "../lib/types";
 import { trackEvent } from "../utils/analytics";
 import { LocaleToggle } from "./LocaleToggle";
 import { ResultBars } from "./ResultBars";
@@ -54,6 +60,7 @@ interface ResultScreenProps {
   copy: AppCopy;
   dimensions: DimensionDefinition[];
   locale: Locale;
+  personalities: Personality[];
   result: AssessmentResult;
   onRestart: () => void;
   onLocaleChange: (locale: Locale) => void;
@@ -63,11 +70,18 @@ export function ResultScreen({
   copy,
   dimensions,
   locale,
+  personalities,
   result,
   onRestart,
   onLocaleChange,
 }: ResultScreenProps) {
   const { personality } = result;
+  const nemesisTitle = personalities.find(
+    (item) => item.code === personality.nemesis.code
+  )?.title;
+  const soulmateTitle = personalities.find(
+    (item) => item.code === personality.soulmate.code
+  )?.title;
   const shareCardRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
 
@@ -144,6 +158,7 @@ export function ResultScreen({
           <p className="result-kicker">{personality.group}</p>
           <h1 className="result-code">{result.code}</h1>
           <h2 className="result-title">{personality.title}</h2>
+          <p className="result-subtitle">{personality.subtitle}</p>
           <p className="result-quote">“{personality.quote}”</p>
         </div>
         <div className="result-hero-figure">
@@ -177,6 +192,26 @@ export function ResultScreen({
           <h3>{copy.resultSections.environment}</h3>
           <p>{personality.environment}</p>
         </article>
+        <article className="result-card">
+          <h3>{copy.resultSections.nemesis}</h3>
+          <p>
+            <strong>
+              {personality.nemesis.code} · {nemesisTitle}
+            </strong>
+            <br />
+            {personality.nemesis.note}
+          </p>
+        </article>
+        <article className="result-card">
+          <h3>{copy.resultSections.soulmate}</h3>
+          <p>
+            <strong>
+              {personality.soulmate.code} · {soulmateTitle}
+            </strong>
+            <br />
+            {personality.soulmate.note}
+          </p>
+        </article>
       </div>
 
       <article className="result-card result-card--lifestyle">
@@ -200,7 +235,12 @@ export function ResultScreen({
       {isExporting ? (
         <div className="share-export-shell">
           <div ref={shareCardRef}>
-            <ShareCard copy={copy} dimensions={dimensions} result={result} />
+            <ShareCard
+              copy={copy}
+              dimensions={dimensions}
+              personalities={personalities}
+              result={result}
+            />
           </div>
         </div>
       ) : null}

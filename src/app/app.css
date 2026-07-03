@@ -895,3 +895,23 @@ button {
     margin-top: 24px;
   }
 }
+
+.result-subtitle {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #5b7083;
+}
+
+.share-card-subtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #56707f;
+}
+
+.share-card-relations {
+  margin: 14px 0 0;
+  font-size: 13px;
+  text-align: center;
+  color: #2c4657;
+}

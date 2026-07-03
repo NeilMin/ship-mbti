@@ -314,6 +314,7 @@ export function App() {
           locale={locale}
           onLocaleChange={handleLocaleChange}
           onRestart={handleRestart}
+          personalities={content.personalities}
           result={result}
         />
       )}

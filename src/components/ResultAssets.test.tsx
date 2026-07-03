@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { copyByLocale } from "../data/copy";
 import { dimensionsZh } from "../data/dimensions.zh";
+import { personalitySets } from "../data/personalities";
 import { describe, expect, it, vi } from "vitest";
 import { getAssessmentResultByCode } from "../lib/scoring";
 import { ResultScreen } from "./ResultScreen";
@@ -28,6 +29,7 @@ describe("Result artwork", () => {
         locale="zh"
         onLocaleChange={() => {}}
         onRestart={() => {}}
+        personalities={personalitySets.zh}
         result={result}
       />
     );
@@ -35,12 +37,22 @@ describe("Result artwork", () => {
     const image = container.querySelector(".result-hero-image");
     expect(image).not.toBeNull();
     expect(image).toHaveAttribute("src", "/characters/capw.png");
+    expect(screen.getByText("资深敏捷交付专家")).toBeInTheDocument();
+    expect(screen.getByText("天敌")).toBeInTheDocument();
+    expect(screen.getByText(/古法编程仙人/)).toBeInTheDocument();
   });
 
   it("renders the matching character illustration on the share card", () => {
     const result = getAssessmentResultByCode("TOPW");
 
-    render(<ShareCard copy={copyByLocale.zh} dimensions={dimensionsZh} result={result} />);
+    render(
+      <ShareCard
+        copy={copyByLocale.zh}
+        dimensions={dimensionsZh}
+        personalities={personalitySets.zh}
+        result={result}
+      />
+    );
 
     const image = screen.getByRole("img", { name: /TOPW character illustration/i });
     expect(image).toHaveAttribute("src", "/characters/topw.png");
@@ -53,6 +65,8 @@ describe("Result artwork", () => {
     expect(screen.getByText("下班后目击报告")).toBeInTheDocument();
     expect(screen.getByText("mbti.neilmin.com")).toBeInTheDocument();
     expect(screen.getByTestId("share-card-qr")).toBeInTheDocument();
+    expect(screen.getByText("核心系统稳定性负责人")).toBeInTheDocument();
+    expect(screen.getByText(/天敌：CALG/)).toBeInTheDocument();
   });
 
   it("keeps the displayed leading percentage aligned with the filled bar", () => {
@@ -66,9 +80,15 @@ describe("Result artwork", () => {
           locale="zh"
           onLocaleChange={() => {}}
           onRestart={() => {}}
+          personalities={personalitySets.zh}
           result={result}
         />
-        <ShareCard copy={copyByLocale.zh} dimensions={dimensionsZh} result={result} />
+        <ShareCard
+          copy={copyByLocale.zh}
+          dimensions={dimensionsZh}
+          personalities={personalitySets.zh}
+          result={result}
+        />
       </>
     );
 
@@ -125,6 +145,7 @@ describe("Result artwork", () => {
         locale="zh"
         onLocaleChange={() => {}}
         onRestart={() => {}}
+        personalities={personalitySets.zh}
         result={result}
       />
     );
